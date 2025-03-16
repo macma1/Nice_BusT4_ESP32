@@ -40,4 +40,4 @@ Original version on Wemos D1 Mini available at https://github.com/pruwait/Nice_B
 English version on Wemos D1 Mini available at https://github.com/xdanik/Nice_BusT4.
 
 # Connection with WT32_ETH01:
-RX & TX connect to IO5 and IO17 of WT32-ETH01.
+RX & TX connect to IO16 and IO17 of WT32-ETH01.
