@@ -6,14 +6,15 @@ from esphome.const import CONF_ADDRESS, CONF_ID, CONF_UPDATE_INTERVAL, CONF_USE_
 
 
 bus_t4_ns = cg.esphome_ns.namespace('bus_t4')
+
 Nice = bus_t4_ns.class_('NiceBusT4', cover.Cover, cg.Component)
 
-CONFIG_SCHEMA = cover.COVER_SCHEMA.extend({
-    cv.GenerateID(): cv.declare_id(Nice),
+CONFIG_SCHEMA = cover.cover_schema(
+    Nice,
     cv.Optional(CONF_ADDRESS): cv.hex_uint16_t,
     cv.Optional(CONF_USE_ADDRESS): cv.hex_uint16_t,
-#    cv.Optional(CONF_UPDATE_INTERVAL): cv.positive_time_period_milliseconds,
-}).extend(cv.COMPONENT_SCHEMA)
+    # cv.Optional(CONF_UPDATE_INTERVAL): cv.positive_time_period_milliseconds,
+).extend(cv.COMPONENT_SCHEMA)
 
 
 def to_code(config):
