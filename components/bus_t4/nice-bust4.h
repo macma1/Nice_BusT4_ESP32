@@ -418,7 +418,7 @@ class NiceBusT4 : public Component, public Cover {
     
     bool init_ok = false;  // drive detection when turned on
     bool is_walky = false; // the position request command is different for walky
-    bool is_robus = false; // for Robus there is no need to periodically request a position
+    bool no_need_to_periodically_request_a_position = false; // for Robus there is no need to periodically request a position
     
     void setup() override;
     void loop() override;
