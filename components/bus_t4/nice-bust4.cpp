@@ -583,10 +583,12 @@ void NiceBusT4::parse_status_packet(const std::vector<uint8_t> &data) {
             this->oxi_product.assign(this->rx_message_.begin() + 14, this->rx_message_.end() - 2);
           } // if the packet is from the receiver
           else if ((this->addr_to[0] == data[4]) && (this->addr_to[1] == data[5])) { // if the package is from the drive controller
-//            ESP_LOGCONFIG(TAG, "  Drive unit: %S ", str.c_str());
+            ESP_LOGCONFIG(TAG, "  Drive unit: %S ", str.c_str());
             this->product_.assign(this->rx_message_.begin() + 14, this->rx_message_.end() - 2);
             std::vector<uint8_t> wla1 = {0x57,0x4C,0x41,0x31,0x00,0x06,0x57}; // to understand that Walky drive
             std::vector<uint8_t> ROBUSHSR10 = {0x52,0x4F,0x42,0x55,0x53,0x48,0x53,0x52,0x31,0x30,0x00}; // to understand that the ROBUSHSR10 drive
+            std::vector<uint8_t> RBA4R10 = {0x52, 0x42, 0x41, 0x34, 0x52, 0x31, 0x30,0x00}; // to understand that the RBA4R10 drive
+            
             if (this->product_ == wla1) { 
               this->is_walky = true;
          //     ESP_LOGCONFIG(TAG, "  WALKY drive!: %S ", str.c_str());
@@ -595,7 +597,10 @@ void NiceBusT4::parse_status_packet(const std::vector<uint8_t> &data) {
               this->is_robus = true;
           //    ESP_LOGCONFIG(TAG, "  Drive unit ROBUS!: %S ", str.c_str());
                                         }     
-
+            if (this->product_ == RBA4R10) { 
+              this->is_robus = true;
+              ESP_LOGCONFIG(TAG, "  Drive unit RBA4R10!: %S ", str.c_str());
+                                        }  
           }
           break;
         case HWR:
